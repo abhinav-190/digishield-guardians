@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -47,10 +46,12 @@
   body {
     @apply bg-background text-foreground antialiased font-inter;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    scroll-behavior: smooth;
   }
 
   html {
     @apply scroll-smooth;
+    overflow-y: overlay;
   }
 }
 
@@ -131,10 +132,10 @@
 .encryption-pending { @apply text-yellow-500; }
 .encryption-failed { @apply text-red-500; }
 
-/* Scroll bar styling */
+/* Scroll bar styling - improved for smoother scrolling */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -142,9 +143,22 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-muted rounded-full;
+  @apply bg-muted rounded-full transition-all duration-200;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-muted-foreground;
+}
+
+/* Add smooth scrolling utility */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Add for scroll containers */
+.scroll-container {
+  @apply smooth-scroll overflow-auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) transparent;
 }

@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/components/Layout";
 import Index from "./pages/Index";
+import SecurityScan from "./pages/SecurityScan";
 import NotFound from "./pages/NotFound";
 
 // Create a client
@@ -26,7 +27,7 @@ function App() {
               <Route path="api" element={<Index />} />
               <Route path="network" element={<Index />} />
               <Route path="encryption" element={<Index />} />
-              <Route path="scan" element={<Index />} />
+              <Route path="scan" element={<SecurityScan />} />
               <Route path="settings" element={<Index />} />
             </Route>
             <Route path="*" element={<NotFound />} />

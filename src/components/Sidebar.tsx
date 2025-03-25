@@ -15,14 +15,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     { to: '/traffic', icon: <Activity className="h-5 w-5" />, label: 'Traffic Monitor' },
     { to: '/api', icon: <Zap className="h-5 w-5" />, label: 'API Security' },
     { to: '/network', icon: <Database className="h-5 w-5" />, label: 'Network Graph' },
-    { to: '/scan', icon: <Search className="h-5 w-5" />, label: 'Vulnerability Scan' },
+    { to: '/scan', icon: <Search className="h-5 w-5" />, label: 'Security Scanner' },
     { to: '/encryption', icon: <Lock className="h-5 w-5" />, label: 'Encryption' },
   ];
 
   return (
     <aside 
       className={cn(
-        "fixed inset-y-0 left-0 z-40 w-64 border-r border-white/5 bg-background transition-transform duration-300 ease-in-out md:translate-x-0",
+        "fixed inset-y-0 left-0 z-40 w-64 border-r border-white/5 bg-background transition-transform duration-300 ease-in-out md:translate-x-0 scroll-container",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}
     >
@@ -46,6 +46,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
               className={({ isActive }) => 
                 cn("nav-item", isActive && "active")
               }
+              end={item.to === "/"}
             >
               {item.icon}
               <span>{item.label}</span>
@@ -55,7 +56,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       </div>
       
       <div className="absolute bottom-0 left-0 right-0 border-t border-white/5 p-4">
-        <NavLink to="/settings" className="nav-item">
+        <NavLink to="/settings" className={({ isActive }) => 
+          cn("nav-item", isActive && "active")
+        }>
           <Settings className="h-5 w-5" />
           <span>Settings</span>
         </NavLink>
