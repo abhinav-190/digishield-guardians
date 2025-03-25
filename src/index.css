@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -161,4 +162,47 @@
   @apply smooth-scroll overflow-auto;
   scrollbar-width: thin;
   scrollbar-color: var(--muted) transparent;
+}
+
+/* Improved page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+/* Optimize rendering performance */
+* {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent content jump when scrollbar appears */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Smooth scrolling for the entire document */
+html, body, .smooth-scroll-container {
+  scroll-behavior: smooth;
+}
+
+/* Add will-change for hardware acceleration on animations */
+.hardware-accelerated {
+  will-change: transform, opacity;
 }
