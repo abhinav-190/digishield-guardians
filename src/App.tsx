@@ -9,16 +9,14 @@ import Index from "./pages/Index";
 import SecurityScan from "./pages/SecurityScan";
 import NotFound from "./pages/NotFound";
 
-// Create a client
-const queryClient = new QueryClient();
-
 function App() {
+  // Create a client
+  const queryClient = new QueryClient();
+
   return (
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
         <TooltipProvider>
-          <Toaster />
-          <Sonner />
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Index />} />
@@ -32,9 +30,11 @@ function App() {
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Toaster />
+          <Sonner />
         </TooltipProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

@@ -53,6 +53,10 @@ interface State {
   toasts: ToasterToast[]
 }
 
+const initialState: State = {
+  toasts: [],
+}
+
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
 const addToRemoveQueue = (toastId: string) => {
@@ -126,9 +130,41 @@ export const reducer = (state: State, action: Action): State => {
   }
 }
 
+// Create a context with a default value
+const ToastContext = React.createContext<{
+  state: State
+  dispatch: React.Dispatch<Action>
+}>({
+  state: initialState,
+  dispatch: () => null,
+})
+
+// Create a provider component
+export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ 
+  children 
+}) => {
+  const [state, dispatch] = React.useReducer(reducer, initialState)
+
+  return (
+    <ToastContext.Provider value={{ state, dispatch }}>
+      {children}
+    </ToastContext.Provider>
+  )
+}
+
+// Create a custom hook to use the toast context
+export const useToastContext = () => {
+  const context = React.useContext(ToastContext)
+  if (context === undefined) {
+    throw new Error('useToastContext must be used within a ToastProvider')
+  }
+  return context
+}
+
+// Keep the original implementation for backward compatibility
 const listeners: Array<(state: State) => void> = []
 
-let memoryState: State = { toasts: [] }
+let memoryState: State = initialState
 
 function dispatch(action: Action) {
   memoryState = reducer(memoryState, action)
