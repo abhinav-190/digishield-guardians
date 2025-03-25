@@ -8,6 +8,7 @@ import Layout from "@/components/Layout";
 import Index from "./pages/Index";
 import SecurityScan from "./pages/SecurityScan";
 import NotFound from "./pages/NotFound";
+import { ToastProvider } from "@/hooks/use-toast";
 
 function App() {
   // Create a client
@@ -15,25 +16,27 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <TooltipProvider>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Index />} />
-              <Route path="threats" element={<Index />} />
-              <Route path="traffic" element={<Index />} />
-              <Route path="api" element={<Index />} />
-              <Route path="network" element={<Index />} />
-              <Route path="encryption" element={<Index />} />
-              <Route path="scan" element={<SecurityScan />} />
-              <Route path="settings" element={<Index />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Toaster />
-          <Sonner />
-        </TooltipProvider>
-      </BrowserRouter>
+      <ToastProvider>
+        <BrowserRouter>
+          <TooltipProvider>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Index />} />
+                <Route path="threats" element={<Index />} />
+                <Route path="traffic" element={<Index />} />
+                <Route path="api" element={<Index />} />
+                <Route path="network" element={<Index />} />
+                <Route path="encryption" element={<Index />} />
+                <Route path="scan" element={<SecurityScan />} />
+                <Route path="settings" element={<Index />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Toaster />
+            <Sonner />
+          </TooltipProvider>
+        </BrowserRouter>
+      </ToastProvider>
     </QueryClientProvider>
   );
 }
