@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Shield, AlertTriangle } from 'lucide-react';
 import DataCard from './ui/DataCard';
 import { Progress } from '@/components/ui/progress';
+import { cn } from '@/lib/utils';
 
 const generateRandomThreats = () => {
   return {
@@ -62,7 +63,12 @@ const ThreatAnalysis: React.FC = () => {
                   <span className="text-red-500">Critical</span>
                   <span>{threats.critical}</span>
                 </div>
-                <Progress value={(threats.critical / 5) * 100} className="h-1 bg-muted" indicatorClassName="bg-red-500" />
+                <div className="relative h-1 w-full bg-muted overflow-hidden rounded-full">
+                  <div 
+                    className={cn("absolute top-0 left-0 h-full bg-red-500")}
+                    style={{ width: `${(threats.critical / 5) * 100}%` }}
+                  />
+                </div>
               </div>
               
               <div className="space-y-1">
@@ -70,7 +76,12 @@ const ThreatAnalysis: React.FC = () => {
                   <span className="text-orange-500">High</span>
                   <span>{threats.high}</span>
                 </div>
-                <Progress value={(threats.high / 10) * 100} className="h-1 bg-muted" indicatorClassName="bg-orange-500" />
+                <div className="relative h-1 w-full bg-muted overflow-hidden rounded-full">
+                  <div 
+                    className={cn("absolute top-0 left-0 h-full bg-orange-500")}
+                    style={{ width: `${(threats.high / 10) * 100}%` }}
+                  />
+                </div>
               </div>
               
               <div className="space-y-1">
@@ -78,7 +89,12 @@ const ThreatAnalysis: React.FC = () => {
                   <span className="text-yellow-500">Medium</span>
                   <span>{threats.medium}</span>
                 </div>
-                <Progress value={(threats.medium / 20) * 100} className="h-1 bg-muted" indicatorClassName="bg-yellow-500" />
+                <div className="relative h-1 w-full bg-muted overflow-hidden rounded-full">
+                  <div 
+                    className={cn("absolute top-0 left-0 h-full bg-yellow-500")}
+                    style={{ width: `${(threats.medium / 20) * 100}%` }}
+                  />
+                </div>
               </div>
               
               <div className="space-y-1">
@@ -86,7 +102,12 @@ const ThreatAnalysis: React.FC = () => {
                   <span className="text-green-500">Low</span>
                   <span>{threats.low}</span>
                 </div>
-                <Progress value={(threats.low / 30) * 100} className="h-1 bg-muted" indicatorClassName="bg-green-500" />
+                <div className="relative h-1 w-full bg-muted overflow-hidden rounded-full">
+                  <div 
+                    className={cn("absolute top-0 left-0 h-full bg-green-500")}
+                    style={{ width: `${(threats.low / 30) * 100}%` }}
+                  />
+                </div>
               </div>
             </div>
           </>
